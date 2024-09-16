@@ -1,16 +1,8 @@
-*This project is not maintained anymore*
-======================================
+This is fork of https://github.com/PierreQuentel/PyDbLite
 
-.. |build-status| image:: https://api.travis-ci.org/bendikro/PyDbLite.svg?branch=master
-    :target: https://travis-ci.org/bendikro/PyDbLite
+It does support Python 3.11 and latest pip
 
-.. |docs| image:: https://readthedocs.org/projects/pydblite/badge/?version=latest
-    :target: https://pydblite.readthedocs.org
-    :alt: Documentation Status
 
-.. |pypi| image:: http://img.shields.io/pypi/v/pydblite.png
-    :alt: PYPI Package
-    :target: https://pypi.python.org/pypi/PyDbLite
 
 PyDbLite
 =============
@@ -25,7 +17,7 @@ PyDbLite is
 
 PyDbLite is suitable for a small set of data where a fully fledged DB would be overkill.
 
-Supported Python versions: 2.6+
+Supported Python versions: 3.9+
 
 Build status: |build-status|
 

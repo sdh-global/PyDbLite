@@ -2,3 +2,8 @@
 .tox
 .cache
 .coverage
+
+env/*
+dist/*
+*.egg-info/
+.idea

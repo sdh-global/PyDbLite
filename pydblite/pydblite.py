@@ -15,12 +15,9 @@ from itertools import groupby
 
 from .common import Expression, ExpressionGroup, Filter
 
-try:
-    import cPickle as pickle
-except:
-    import pickle
+import pickle
 
-version = "3.0.5"
+version = "3.1.0"
 
 
 def _in(a, b):
