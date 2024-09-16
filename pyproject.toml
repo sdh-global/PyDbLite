@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyDbLite3"
-version = "3.1.0"
+version = "3.1.1"
 description = "A lightweight database engine in Python"
 readme = "docs/long_description.rst"
 requires-python = ">=3.9"
