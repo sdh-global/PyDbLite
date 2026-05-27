@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "PyDbLite3"
 version = "3.2.0"
 description = "A lightweight database engine in Python"
-readme = "docs/long_description.rst"
+readme = "docs/source/long_description.rst"
 requires-python = ">=3.9"
 keywords = ["Python", "database", "engine", "SQLite"]
 license = "BSD-3-Clause"
