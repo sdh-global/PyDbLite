@@ -1,6 +1,23 @@
 Changelog
 ---------------
 
+3.2.0 (2026-05-27)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Python 3.13 compatibility: removed the ``pkg_resources`` import that broke
+  ``import pydblite`` on Python 3.12+ (where ``setuptools`` is no longer
+  installed by default).
+- Dropped all Python 2 support code (``basestring``, ``itervalues``,
+  ``cStringIO``, ``pysqlite2`` fallback, ``sys.version_info`` branching).
+- Fixed ``SyntaxWarning`` issues on modern Python (identity comparison with a
+  string literal, invalid escape sequences in regexes and docstrings).
+- Registered explicit ``sqlite3`` date/time/datetime adapters to replace the
+  default adapters deprecated in Python 3.12.
+- Declared support for Python 3.9 - 3.13; modernised packaging metadata
+  (SPDX license expression, ``license-files``).
+- Ported the Sphinx documentation to a modern toolchain and removed obsolete
+  content.
+
 3.0.4 (2016-04-17)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -9,14 +9,8 @@ def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
     return type('Enum', (), enums)
 
-try:
-    strinstance = basestring
-except:
-    strinstance = str
-
-
 def is_iterable_but_not_str(x):
-    return hasattr(x, '__iter__') and not isinstance(x, strinstance)
+    return hasattr(x, '__iter__') and not isinstance(x, str)
 
 
 class Expression(object):

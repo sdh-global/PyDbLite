@@ -3,8 +3,6 @@
 Unit tests
 ====================
 
-Check the `test coverage <../htmlcoverage/index.html>`_.
-
 .. automodule::  tests.common_tests
     :members:
     :undoc-members:

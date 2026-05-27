@@ -205,9 +205,9 @@ Other attributes and methods
 
 - :func:`add_field('new_field'[,default=v]) <pydblite.pydblite._Base.add_field>`: adds a new field to an existing base. :python:`default` is an optional default value ; set to :python:`None` if not specified
 - :func:`drop_field('field') <pydblite.pydblite._Base.drop_field>`: drops an existing field
-- :attr:`db.path <pydblite.pydblite._Base.path>`: the path of the database in the file system
-- :attr:`db.name <pydblite.pydblite._Base.name>`: the database name : the basename of the path, stripped of its extension
-- :attr:`db.fields <pydblite.pydblite._Base.fields>`: the list of the fields (does not include the internal fields :python:`__id__` and :python:`__version__`)
+- :python:`db.path`: the path of the database in the file system
+- :python:`db.name`: the database name : the basename of the path, stripped of its extension
+- :python:`db.fields`: the list of the fields (does not include the internal fields :python:`__id__` and :python:`__version__`)
 - :python:`len(db)` : number of records in the base
 
 

@@ -2,16 +2,16 @@
 
 import datetime
 import os
-import sys
 import unittest
 
 from pydblite import sqlite
 
 from .common_tests import Generic
 
-if sys.version_info[0] == 3:
-    def unicode(s, en):
-        return s
+
+def unicode(s, en):
+    return s
+
 
 test_db_name = 'test_database_sqlite'
 

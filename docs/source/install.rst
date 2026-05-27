@@ -6,7 +6,7 @@ PIP
 
 .. code-block:: bash
 
-    pip install pydblite
+    pip install PyDbLite3
 
 Manually
 ~~~~~~~~~
@@ -15,4 +15,4 @@ Download the source and execute
 
 .. code-block:: bash
 
-    python setup.py install
+    pip install .

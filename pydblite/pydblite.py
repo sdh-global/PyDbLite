@@ -10,14 +10,13 @@
 import bisect
 import operator
 import os
-import sys
 from itertools import groupby
 
 from .common import Expression, ExpressionGroup, Filter
 
 import pickle
 
-version = "3.1.1"
+version = "3.2.0"
 
 
 def _in(a, b):
@@ -141,7 +140,7 @@ class _Base(object):
         Create a new base with specified field names.
 
         Args:
-            - \*fields (str): The field names to create.
+            - \\*fields (str): The field names to create.
             - mode (str): the mode used when creating the database.
 
         - if mode = 'create' : create a new base (the default value)
@@ -159,7 +158,7 @@ class _Base(object):
         if self.save_to_file and os.path.exists(self.path):
             if not os.path.isfile(self.path):
                 raise IOError("{} exists and is not a file".format(self.path))
-            elif self.mode is 'create':
+            elif self.mode == 'create':
                 raise IOError("Base {} already exists".format(self.path))
             elif self.mode == "open":
                 return self.open()
@@ -526,20 +525,8 @@ class _Base(object):
         return list(self.indices)
 
 
-class _BasePy2(_Base):
-
-    def __iter__(self):
-        """Iteration on the records"""
-        return iter(self.records.itervalues())
-
-
-class _BasePy3(_Base):
+class Base(_Base):
 
     def __iter__(self):
         """Iteration on the records"""
         return iter(self.records.values())
-
-if sys.version_info[0] == 2:
-    Base = _BasePy2
-else:
-    Base = _BasePy3

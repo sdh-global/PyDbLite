@@ -11,4 +11,4 @@ PyDbLite is
 
 PyDbLite is suitable for a small set of data where a fully fledged DB would be overkill.
 
-Supported Python versions: 2.6+
+Supported Python versions: 3.9+

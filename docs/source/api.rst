@@ -19,7 +19,6 @@ PyDbLite.SQLite API
 -------------------------------
 
 .. automodule:: pydblite.sqlite
-   :members:
 
 .. autoclass:: pydblite.sqlite.Database
    :members:

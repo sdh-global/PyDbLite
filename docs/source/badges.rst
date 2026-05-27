@@ -1,10 +1,11 @@
-.. |build-status| image:: https://api.travis-ci.org/bendikro/PyDbLite.svg?branch=master
-    :target: https://travis-ci.org/bendikro/PyDbLite
+.. |build-status| image:: https://github.com/sdh-global/PyDbLite/actions/workflows/tests.yml/badge.svg?branch=master
+    :target: https://github.com/sdh-global/PyDbLite/actions
+    :alt: Build Status
 
 .. |docs| image:: https://readthedocs.org/projects/pydblite/badge/?version=latest
-    :target: https://pydblite.readthedocs.org
+    :target: https://pydblite.readthedocs.io
     :alt: Documentation Status
 
-.. |pypi| image:: http://img.shields.io/pypi/v/pydblite.png
-    :alt: PYPI Package
-    :target: https://pypi.python.org/pypi/PyDbLite
+.. |pypi| image:: https://img.shields.io/pypi/v/PyDbLite3.svg
+    :alt: PyPI Package
+    :target: https://pypi.org/project/PyDbLite3/

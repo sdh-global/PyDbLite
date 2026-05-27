@@ -18,19 +18,8 @@ Main differences from :mod:`pydblite.pydblite`:
   be executed.
 """
 
-try:
-    import cStringIO as io
-
-    def to_str(val, encoding="utf-8"):  # encode a Unicode string to a Python 2 str
-        return val.encode(encoding)
-except ImportError:
-    import io
-    unicode = str  # used in tests
-
-    def to_str(val):  # leaves a Unicode unchanged
-        return val
-
 import datetime
+import io
 import re
 import traceback
 
@@ -41,18 +30,8 @@ try:
     from sqlite3 import dbapi2 as sqlite
     from sqlite3 import OperationalError
 except ImportError:
-    try:
-        from pysqlite2 import dbapi2 as sqlite
-        from pysqlite2._sqlite import OperationalError
-    except ImportError:
-        print("SQLite is not installed")
-        raise
-
-# compatibility with Python 2.3
-try:
-    set([])
-except NameError:
-    from sets import Set as set  # NOQA
+    print("SQLite is not installed")
+    raise
 
 
 # classes for CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP
@@ -78,9 +57,9 @@ DEFAULT_CLASSES = [CurrentDate, CurrentTime, CurrentTimestamp]
 # CURRENT_DATE : YYYY-MM-DD
 # CURRENT_TIMESTAMP : YYYY-MM-DD HH:MM:SS
 
-c_time_fmt = re.compile('^(\d{2}):(\d{2}):(\d{2})$')
-c_date_fmt = re.compile('^(\d{4})-(\d{2})-(\d{2})$')
-c_tmsp_fmt = re.compile('^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})')
+c_time_fmt = re.compile(r'^(\d{2}):(\d{2}):(\d{2})$')
+c_date_fmt = re.compile(r'^(\d{4})-(\d{2})-(\d{2})$')
+c_tmsp_fmt = re.compile(r'^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})')
 
 
 # DATE : convert YYYY-MM-DD to datetime.date instance
@@ -110,12 +89,32 @@ def to_time(_time):
 def to_datetime(timestamp):
     if timestamp is None:
         return None
-    if not isinstance(timestamp, unicode):
+    if not isinstance(timestamp, str):
         raise ValueError("Bad value %s for TIMESTAMP format" % timestamp)
     mo = c_tmsp_fmt.match(timestamp)
     if not mo:
         raise ValueError("Bad value %s for TIMESTAMP format" % timestamp)
     return datetime.datetime(*[int(x) for x in mo.groups()])
+
+
+# Python 3.12 deprecated the implicit default adapters for date/datetime
+# values, so register explicit ones producing the string formats understood
+# by the converters above (no microseconds, space-separated timestamp).
+def _adapt_date(value):
+    return value.isoformat()
+
+
+def _adapt_time(value):
+    return value.replace(microsecond=0).isoformat()
+
+
+def _adapt_datetime(value):
+    return value.replace(microsecond=0).isoformat(sep=" ")
+
+
+sqlite.register_adapter(datetime.date, _adapt_date)
+sqlite.register_adapter(datetime.time, _adapt_time)
+sqlite.register_adapter(datetime.datetime, _adapt_datetime)
 
 
 # if default value is CURRENT_DATE etc. SQLite doesn't
@@ -319,15 +318,15 @@ class Table(object):
         self.field_info = {}
         self.cursor.execute('PRAGMA table_info (%s)' % self.name)
         for field_info in self.cursor.fetchall():
-            fname = to_str(field_info[1])
+            fname = field_info[1]
             self.fields.append(fname)
-            ftype = to_str(field_info[2])
+            ftype = field_info[2]
             info = {'type': ftype}
             # can be null ?
             info['NOT NULL'] = field_info[3] != 0
             # default value
             default = field_info[4]
-            if isinstance(default, unicode):
+            if isinstance(default, str):
                 default = guess_default_fmt(default)
             info['DEFAULT'] = default
             self.field_info[fname] = info

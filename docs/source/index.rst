@@ -5,8 +5,8 @@
 
 :tocdepth: 3
 
- .. image:: ../../doc/img/banniere.jpg
-    :align: center
+.. image:: banniere.jpg
+   :align: center
 
 .. role:: python(code)
     :language: py
@@ -31,10 +31,8 @@
    :hidden:
 
    unittests
-   benchmarks
    changelog
    license
-   doccoverage
    contact
 
 
